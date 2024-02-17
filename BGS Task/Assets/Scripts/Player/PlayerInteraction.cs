@@ -7,6 +7,9 @@ public class PlayerInteraction : MonoBehaviour
 {
     private PlayerInteractionTarget? interactionTarget;
 
+    public delegate void ShopUI();
+    public static event ShopUI OnShopOpen;
+
     void OnEnable()
     {
         Interaction.OnPlayerInteracted += SetInteractionTarget;
@@ -31,6 +34,7 @@ public class PlayerInteraction : MonoBehaviour
             switch(interactionTarget)
             {
                 case PlayerInteractionTarget.SHOP:
+                    OnShopOpen?.Invoke();
                     break;
                 case PlayerInteractionTarget.DOOR:
                     break;

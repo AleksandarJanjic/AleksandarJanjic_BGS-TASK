@@ -36,13 +36,19 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
-     <Compile Include="Assets\Scripts\World\Shopkeeper.cs" />
+     <Compile Include="Assets\Scripts\Scriptable Objects\Item.cs" />
+     <Compile Include="Assets\Scripts\UI\ShopUIController.cs" />
+     <Compile Include="Assets\Scripts\UI\InteractionTextController.cs" />
      <Compile Include="Assets\Scripts\World\Interaction.cs" />
+     <Compile Include="Assets\Scripts\World\Shopkeeper.cs" />
+     <Compile Include="Assets\Scripts\UI\UIElementController.cs" />
+     <Compile Include="Assets\Scripts\World\ShopController.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\Player\PlayerInteraction.cs" />
      <Compile Include="Assets\Scripts\UI\UIManager.cs" />
-     <Compile Include="Assets\Scripts\UI\UIElementController.cs" />
-     <Compile Include="Assets\Scripts\UI\InteractionTextController.cs" />
+     <Compile Include="Assets\Scripts\UI\UIShopItem.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerInventory.cs" />
+     <Compile Include="Assets\Scripts\Player\PlayerManager.cs" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
