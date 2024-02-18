@@ -22,6 +22,13 @@ public class InteractionTextController : MonoBehaviour
     {
         if(target != null)
         {
+            if(target == PlayerInteractionTarget.SHOP)
+            {
+                interactionText.text = "Press F to open Shop Menu";
+            } else if(target == PlayerInteractionTarget.DOOR)
+            {
+                interactionText.text = "Leaving the shop not implemented";
+            }
             animator.SetTrigger("Show");
             animator.ResetTrigger("Hide");
         } else 

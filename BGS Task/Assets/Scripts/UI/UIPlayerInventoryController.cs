@@ -12,23 +12,29 @@ public class UIPlayerInventoryController : MonoBehaviour
     [SerializeField] private UIInventorySelectedItem selectedItemUI;
     private Item selectedItem;
 
-    void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.I))
-        {
-            ShowInventory();
-        }
+    public delegate void ToggleButton(bool toggle);
+    public static event ToggleButton OnToggleButton;
 
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            HideInventory();
-        }
+    public delegate void ToggleShowExit(bool toggle);
+    public static event ToggleShowExit OnToggleShowExit;
+
+    void OnEnable()
+    {
+        UIInventoryButton.OnInventoryButton += ShowInventory;
+    }
+
+    void OnDisable()
+    {
+        UIInventoryButton.OnInventoryButton -= ShowInventory;
     }
 
     public void ShowInventory()
     {
         animator.SetTrigger("Show");
         animator.ResetTrigger("Hide");
+
+        OnToggleButton?.Invoke(false);
+        OnToggleShowExit?.Invoke(false);
 
         ClearSelectedItem();
         PopulateInventory();
@@ -48,6 +54,7 @@ public class UIPlayerInventoryController : MonoBehaviour
             GameObject inventoryItem = Instantiate(inventoryItemPrefab, inventoryContent.transform);
             UIInventoryElement uiInventoryElement = inventoryItem.GetComponent<UIInventoryElement>();
             uiInventoryElement.GetItemImage().sprite = item.itemGraphics;
+            uiInventoryElement.GetItemImage().preserveAspect = true;
             uiInventoryElement.SetItemName(item.itemName);
             inventoryItem.GetComponent<Button>().onClick.AddListener(() => ItemClicked(uiInventoryElement.GetItemName()));
         }
@@ -57,6 +64,9 @@ public class UIPlayerInventoryController : MonoBehaviour
     {
         animator.SetTrigger("Hide");
         animator.ResetTrigger("Show");
+
+        OnToggleButton?.Invoke(true);
+        OnToggleShowExit?.Invoke(true);
     }
 
     public void ItemClicked(string name)

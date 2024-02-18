@@ -23,14 +23,12 @@ public class PlayerInteraction : MonoBehaviour
     private void SetInteractionTarget(PlayerInteractionTarget? target)
     {
         interactionTarget = target;
-        Debug.Log("Interaction Target is: " + interactionTarget.ToString());
     }
 
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.F))
         {
-            Debug.Log("Pressed F");
             switch(interactionTarget)
             {
                 case PlayerInteractionTarget.SHOP:

@@ -14,6 +14,12 @@ public class ShopUIController : MonoBehaviour
     public static event TradeItemDelegate OnBuyItem;
     public static event TradeItemDelegate OnSellItem;
 
+    public delegate void ToggleButton(bool toggle);
+    public static event ToggleButton OnToggleButton;
+
+    public delegate void ToggleShowExit(bool toggle);
+    public static event ToggleShowExit OnToggleShowExit;
+
     void OnEnable()
     {
         ShopController.OnShopUISetup += ShopUISetup;
@@ -30,6 +36,9 @@ public class ShopUIController : MonoBehaviour
     {
         animator.SetTrigger("Show");
         animator.ResetTrigger("Hide");
+
+        OnToggleButton?.Invoke(false);
+        OnToggleShowExit?.Invoke(false);
 
         PopulateShopItems(shopItems);
         PopulatePlayerItems();
@@ -79,6 +88,9 @@ public class ShopUIController : MonoBehaviour
     {
         animator.SetTrigger("Hide");
         animator.ResetTrigger("Show");
+
+        OnToggleButton?.Invoke(true);
+        OnToggleShowExit?.Invoke(true);
     }
 
     private void RefreshShopUI(List<Item> shopItems)

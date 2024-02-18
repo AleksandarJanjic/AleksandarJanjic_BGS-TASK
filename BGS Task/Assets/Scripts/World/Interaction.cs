@@ -13,7 +13,6 @@ public class Interaction : MonoBehaviour
     {
         if(collider != null && collider.GetComponentInParent<PlayerMovement>())
         {
-            Debug.Log("Player enter interaction collider");
             OnPlayerInteracted?.Invoke(playerInteraction);
         }
     }
@@ -22,7 +21,6 @@ public class Interaction : MonoBehaviour
     {
         if(collider != null && collider.GetComponentInParent<PlayerMovement>())
         {
-            Debug.Log("Player exit interaction collider");
             OnPlayerInteracted?.Invoke(null);
         }
     }

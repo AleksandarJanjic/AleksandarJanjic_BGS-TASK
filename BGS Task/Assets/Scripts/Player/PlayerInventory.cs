@@ -10,6 +10,9 @@ public class PlayerInventory : MonoBehaviour
     public delegate void ItemEquip(Item item);
     public static event ItemEquip OnItemUneqip;
 
+    public delegate void CoinsChange(int newAmount);
+    public static event CoinsChange OnCoinsChange;
+
     void OnEnable()
     {
         ShopController.OnAddItem += AddItem;
@@ -75,10 +78,12 @@ public class PlayerInventory : MonoBehaviour
     public void AddCoins(int amount)
     {
         goldCoins += amount;
+        OnCoinsChange?.Invoke(goldCoins);
     }
 
     public void RemoveCoins(int amount)
     {
         goldCoins -= amount;
+        OnCoinsChange?.Invoke(goldCoins);
     }
 }

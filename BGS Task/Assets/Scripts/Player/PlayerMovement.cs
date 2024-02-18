@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float speed;
+    [SerializeField] private GameObject playerGraphics;
     private Rigidbody2D rigidbody;
     private Vector2 playerInput;
     private Vector2 playerInputNormalized;
@@ -24,5 +25,12 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         rigidbody.velocity = playerInputNormalized * speed;
+        if(rigidbody.velocity.x > 0)
+        {
+            playerGraphics.transform.localScale = new Vector2(-4, 4);
+        } else if(rigidbody.velocity.x < 0)
+        {
+            playerGraphics.transform.localScale = new Vector2(4, 4);
+        }
     }
 }

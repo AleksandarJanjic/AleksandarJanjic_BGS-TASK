@@ -19,12 +19,15 @@ public class UIInventorySelectedItem : MonoBehaviour
     {
         nameText.text = item.itemName;
         itemIcon.sprite = item.itemGraphics;
+        itemIcon.preserveAspect = true;
         if(PlayerManager.instance.GetPlayerEquipement().GetSlotByItemName(item.itemName) != null)
         {
+            ClearListeners();
             equipButton.onClick.AddListener(() => UnequipItem(item));
             equipButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
         } else 
         {
+            ClearListeners();
             equipButton.onClick.AddListener(() => EquipItem(item));
             equipButton.GetComponentInChildren<TextMeshProUGUI>().text = "Equip";
         }
@@ -33,6 +36,7 @@ public class UIInventorySelectedItem : MonoBehaviour
     private void EquipItem(Item item)
     {
         OnItemEquip?.Invoke(item);
+        ClearListeners();
         equipButton.onClick.AddListener(() => UnequipItem(item));
         equipButton.GetComponentInChildren<TextMeshProUGUI>().text = "Unequip";
     }
@@ -40,7 +44,13 @@ public class UIInventorySelectedItem : MonoBehaviour
     private void UnequipItem(Item item)
     {
         OnItemUneqip?.Invoke(item);
+        ClearListeners();
         equipButton.onClick.AddListener(() => EquipItem(item));
         equipButton.GetComponentInChildren<TextMeshProUGUI>().text = "Equip";
+    }
+
+    private void ClearListeners()
+    {
+        equipButton.onClick.RemoveAllListeners();
     }
 }
