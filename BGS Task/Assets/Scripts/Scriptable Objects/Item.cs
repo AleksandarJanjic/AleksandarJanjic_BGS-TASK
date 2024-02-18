@@ -9,4 +9,5 @@ public class Item : ScriptableObject
     public int price;
     public Sprite itemGraphics;
     public Sprite shopIcon;
+    public Slot slot;
 }

@@ -30,6 +30,7 @@ public class UIPlayerInventoryController : MonoBehaviour
         animator.SetTrigger("Show");
         animator.ResetTrigger("Hide");
 
+        ClearSelectedItem();
         PopulateInventory();
     }
 
@@ -55,7 +56,7 @@ public class UIPlayerInventoryController : MonoBehaviour
     public void HideInventory()
     {
         animator.SetTrigger("Hide");
-        animator.ResetTrigger("Hide");
+        animator.ResetTrigger("Show");
     }
 
     public void ItemClicked(string name)
@@ -67,5 +68,11 @@ public class UIPlayerInventoryController : MonoBehaviour
             selectedItemGameObject.SetActive(true);
             selectedItemUI.SelectedItemSetup(item);
         }
+    }
+
+    private void ClearSelectedItem()
+    {
+        selectedItem = null;
+        selectedItemGameObject.SetActive(false);
     }
 }

@@ -6,6 +6,7 @@ public class PlayerManager : MonoBehaviour
 {
     public static PlayerManager instance;
     [SerializeField] private PlayerInventory inventory;
+    [SerializeField] private PlayerEquipement equipement;
 
     private void Awake()
     {
@@ -22,5 +23,10 @@ public class PlayerManager : MonoBehaviour
     public PlayerInventory GetPlayerInventory()
     {
         return inventory;
+    }
+
+    public PlayerEquipement GetPlayerEquipement()
+    {
+        return equipement;
     }
 }

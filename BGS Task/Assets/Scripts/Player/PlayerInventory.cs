@@ -7,6 +7,9 @@ public class PlayerInventory : MonoBehaviour
     [SerializeField] private List<Item> items;
     [SerializeField] private int goldCoins;
 
+    public delegate void ItemEquip(Item item);
+    public static event ItemEquip OnItemUneqip;
+
     void OnEnable()
     {
         ShopController.OnAddItem += AddItem;
@@ -47,6 +50,10 @@ public class PlayerInventory : MonoBehaviour
 
     public void RemoveItem(Item item)
     {
+        if(PlayerManager.instance.GetPlayerEquipement().GetSlotByItemName(item.itemName) != null && PlayerManager.instance.GetPlayerEquipement().GetSlotByItemName(item.itemName).isEquiped())
+        {
+            OnItemUneqip?.Invoke(item);
+        }
         items.Remove(item);
     }
 

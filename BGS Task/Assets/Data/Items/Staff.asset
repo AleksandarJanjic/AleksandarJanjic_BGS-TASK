@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fbc70aadb0c15b47b530d97cbbb0a44, type: 3}
+  m_Name: Staff
+  m_EditorClassIdentifier: 
+  itemName: Staff
+  price: 400
+  itemGraphics: {fileID: 21300000, guid: 3aa1cb26afcdc244bb3a95c193575ecb, type: 3}
+  shopIcon: {fileID: 21300000, guid: 3aa1cb26afcdc244bb3a95c193575ecb, type: 3}
+  slot: 1
