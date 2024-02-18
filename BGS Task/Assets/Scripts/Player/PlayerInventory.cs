@@ -4,22 +4,40 @@ using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
-    [SerializeField]
-    private List<Item> items;
+    [SerializeField] private List<Item> items;
+    [SerializeField] private int goldCoins;
 
     void OnEnable()
     {
         ShopController.OnAddItem += AddItem;
+        ShopController.OnRemoveItem += RemoveItem;
+        ShopController.OnAddCoins += AddCoins;
+        ShopController.OnRemoveCoins += RemoveCoins;
     }
 
     void OnDisable()
     {
         ShopController.OnAddItem -= AddItem;
+        ShopController.OnRemoveItem -= RemoveItem;
+        ShopController.OnAddCoins -= AddCoins;
+        ShopController.OnRemoveCoins -= RemoveCoins;
     }
 
     public List<Item> GetPlayerItems()
     {
         return items;
+    }
+
+    public Item GetPlayerItemByName(string name)
+    {
+        foreach(Item item in items)
+        {
+            if(name.Equals(item.itemName))
+            {
+                return item;
+            }
+        }
+        return null;
     }
 
     public void AddItem(Item item)
@@ -30,5 +48,30 @@ public class PlayerInventory : MonoBehaviour
     public void RemoveItem(Item item)
     {
         items.Remove(item);
+    }
+
+    public bool CheckEnoughCoins(int amount)
+    {
+        if(amount <= goldCoins)
+        {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public int GetCoinsAmount()
+    {
+        return goldCoins;
+    }
+
+    public void AddCoins(int amount)
+    {
+        goldCoins += amount;
+    }
+
+    public void RemoveCoins(int amount)
+    {
+        goldCoins -= amount;
     }
 }

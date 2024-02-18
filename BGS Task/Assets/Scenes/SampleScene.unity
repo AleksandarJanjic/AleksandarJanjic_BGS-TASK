@@ -2412,6 +2412,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   items: []
+  goldCoins: 500
 --- !u!114 &1720440240
 MonoBehaviour:
   m_ObjectHideFlags: 0

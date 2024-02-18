@@ -10,17 +10,20 @@ public class ShopUIController : MonoBehaviour
     [SerializeField] private GameObject inventoryContent;
     [SerializeField] private Animator animator;
 
-    public delegate void BuyItemDelegate(string itemName);
-    public static event BuyItemDelegate OnBuyItem;
+    public delegate void TradeItemDelegate(string itemName);
+    public static event TradeItemDelegate OnBuyItem;
+    public static event TradeItemDelegate OnSellItem;
 
     void OnEnable()
     {
         ShopController.OnShopUISetup += ShopUISetup;
+        ShopController.OnShopUIRefresh += RefreshShopUI;
     }
 
     void OnDisable()
     {
         ShopController.OnShopUISetup -= ShopUISetup;
+        ShopController.OnShopUIRefresh -= RefreshShopUI;
     }
 
     public void ShopUISetup(List<Item> shopItems)
@@ -68,6 +71,7 @@ public class ShopUIController : MonoBehaviour
             uiShopItem.SetItemPrice(item.price);
             uiShopItem.SetButtonText(true);
             uiShopItem.SetItemIcon(item.itemGraphics);
+            uiShopItem.GetButton().onClick.AddListener(() => SellItem(item.itemName));
         }
     }
 
@@ -77,9 +81,20 @@ public class ShopUIController : MonoBehaviour
         animator.ResetTrigger("Show");
     }
 
+    private void RefreshShopUI(List<Item> shopItems)
+    {
+        PopulateShopItems(shopItems);
+        PopulatePlayerItems();
+    }
+
     private void BuyItem(string itemName)
     {
         OnBuyItem?.Invoke(itemName);
+    }
+
+    private void SellItem(string itemName)
+    {
+        OnSellItem?.Invoke(itemName);
     }
 
 }
